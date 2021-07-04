@@ -13,7 +13,25 @@ const routes = [
     path:"/SellerRegister",
     name:"SellerRegister",
     component:() => import("../views/SellerRegister.vue")
-  }
+  },
+  {
+    path:"/",
+    name:"CustomerIndex",
+    component:() => import("../views/CustomerIndex.vue"),
+    children:[
+      {
+        path:"/",
+        name:"CustomerMain",
+        component:() => import("../views/CustomerMain.vue")
+      },
+      {
+        path:"/Category",
+        name:"Category",
+        component:() => import("../views/Category.vue")
+    },
+      
+    ]
+  },
 ]
 
 const router = new VueRouter({

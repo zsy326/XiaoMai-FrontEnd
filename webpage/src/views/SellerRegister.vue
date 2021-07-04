@@ -21,25 +21,6 @@
                 <el-input v-model="SellerRegister.password_2" show-password></el-input>
               </el-form-item>
 
-              <el-form-item label="地址" prop="address" label-width="80px">
-                <el-input v-model="SellerRegister.address" type="textarea" autosize maxlength="100"></el-input>
-              </el-form-item>
-
-              <el-form-item v-for="(number,index) in SellerRegister.phoneNumbers" 
-              :label="'联系方式'+(index+1)" 
-              :key="number.key" 
-              :prop="'phoneNumbers.' + index + '.value'"
-              :rules="[{required: true, message: '联系方式不能为空'},
-              {type:'number',message:'联系电话必须是数字'}]"
-               label-width="100px">
-                <el-input v-model.number="number.value"></el-input>&nbsp;&nbsp;<el-button @click.prevent="deletePhone(number)" type="danger" circle icon="el-icon-minus" size="small"></el-button>
-              </el-form-item>
-
-                <el-form-item>
-                <el-button type="success" @click="addPhone()" icon="el-icon-plus" >新增联系方式</el-button>
-                <el-button @click="resetForm('SellerRegister')" icon="el-icon-refresh">重置</el-button>
-              </el-form-item>
-
               <el-form-item>
                 <el-button type="primary" @click="submitForm('SellerRegister')" icon="el-icon-check">注册</el-button>
               </el-form-item>
@@ -79,21 +60,14 @@ export default {
       SellerRegister:{
         sellerName:'',
         password:'',
-        password_2:'',
-        address:'',
-        phoneNumbers:[
-          {
-            value:''
-          }
-        ],
-        avatarBlob:''
+        password_2:''
+
       },
       rules:
       {
          sellerName:[{required:true,trigger:'blur',message:'请输入商家名称'}],
          password:[{required:true,validator:validatePass,trigger:'blur'}],
          password_2:[{required:true,validator:validatePass2,trigger:'blur'}],
-         address:[{required:true,trigger:'blur',message:'请输入地址'}],
       }
     }
   },
@@ -112,28 +86,8 @@ export default {
       resetForm(formName)
       {
         this.$refs[formName].resetFields();
-      },
-      addPhone()
-      {
-        this.SellerRegister.phoneNumbers.push(
-          {
-            value:'',
-            key:Date.now()
-          }
-        )
-      },
-      deletePhone(item)
-      {
-        let index = this.SellerRegister.phoneNumbers.indexOf(item)
-        if(index !== -1)
-        {
-          this.SellerRegister.phoneNumbers.splice(index,1)
-        }
-        else
-        {
-          this.$message.error("Something went wrong");
-        }
-      },
+      }
+      
   }
   }
 </script>
