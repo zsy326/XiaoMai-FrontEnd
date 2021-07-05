@@ -28,15 +28,16 @@
     <el-button circle icon="el-icon-search" @click="handleSearch()"></el-button>
 </el-col>
 <el-col :span="5">
-  <el-dropdown>
-        <el-avatar icon="el-icon-user-solid"></el-avatar>
+  <el-dropdown v-if="isLogin">
+        <el-avatar icon="el-icon-user-solid"></el-avatar> <!--以后要换成用户头像-->
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item @click.native="gotoLink('/CustomerInfoCenter',1)">个人中心</el-dropdown-item>
           <el-dropdown-item @click.native="gotoLink('/Orders',1)"> 订单管理</el-dropdown-item>
           <el-dropdown-item @click.native="gotoLink('/VIP',1)"> 会员管理</el-dropdown-item>
           <el-dropdown-item @click.native="gotoLink('/ResetPassword',1)">密码修改</el-dropdown-item>
         </el-dropdown-menu>
-      </el-dropdown>
+  </el-dropdown>
+  <user-reg-login v-else></user-reg-login>
 </el-col>
         </el-row>
     </el-header>
@@ -52,12 +53,20 @@
 </template>
 
 <script>
+import UserRegLogin from "./userRegLogin";
 export default {
-    data() {
+  components: {UserRegLogin},
+  data() {
       return {
         input: ''
       }
     },
+  computed:{
+    isLogin:function(){
+      return false;
+      <!--刷新页面更新这个值，或者用其他属性或者函数代替-->
+    }
+  },
     methods:
     {
       gotoLink(r,param)
