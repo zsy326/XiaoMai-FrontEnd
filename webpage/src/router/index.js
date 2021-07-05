@@ -28,8 +28,34 @@ const routes = [
         path:"/Category",
         name:"Category",
         component:() => import("../views/Category.vue")
-    },
-      
+      },
+      {
+        path:"/CustomerInfoCenter/:id",
+        name:"CustomerInfoCenter",
+        component:() => import("../views/CustomerInfoCenter.vue")
+      },
+      {
+        path:"/Orders/:id",
+        name:"Orders",
+        component:() => import("../views/Orders.vue")
+      },
+      {
+        path:"/VIP/:id",
+        name:"VIP",
+        component:() => import("../views/VIP.vue")
+      },
+      {
+        path:"/ResetPassword/:id",
+        name:"ResetPassword",
+        component:() => import("../views/ResetPassword.vue")
+      },
+      {
+        path:"/SearchList/:q",
+        name:"SearchList",
+        component:() => import("../views/SearchList.vue")
+      },
+
+
     ]
   },
 ]

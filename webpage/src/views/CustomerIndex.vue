@@ -17,24 +17,24 @@
 </el-menu>
 
         </el-col>
-        <el-col :span="6">
+        <el-col :span="5">
             <el-input
   placeholder="搜索演出、周边"
   v-model="input"
   clearable style="width:250px">
 </el-input>
         </el-col>
-<el-col :span="2">
-    <el-button circle icon="el-icon-search"></el-button>
+<el-col :span="1">
+    <el-button circle icon="el-icon-search" @click="handleSearch()"></el-button>
 </el-col>
 <el-col :span="5">
   <el-dropdown>
         <el-avatar icon="el-icon-user-solid"></el-avatar>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item > 个人中心</el-dropdown-item>
-          <el-dropdown-item > 订单管理</el-dropdown-item>
-          <el-dropdown-item > 会员管理</el-dropdown-item>
-          <el-dropdown-item >密码修改</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/CustomerInfoCenter',1)">个人中心</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/Orders',1)"> 订单管理</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/VIP',1)"> 会员管理</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/ResetPassword',1)">密码修改</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
 </el-col>
@@ -58,6 +58,24 @@ export default {
         input: ''
       }
     },
+    methods:
+    {
+      gotoLink(r,param)
+      {
+        this.$router.replace(r+'/'+param.toString())
+      },
+      handleSearch()
+      {
+        if(this.input === '')
+        {
+          this.$message.error("搜索条件不能为空！");
+        }
+        else
+        {
+          this.gotoLink("SearchList",this.input)
+        }
+      }
+    }
   }
 </script>
 
