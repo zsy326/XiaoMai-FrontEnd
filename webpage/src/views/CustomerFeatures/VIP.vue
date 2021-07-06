@@ -1,7 +1,6 @@
 <template>
 <div>
     VIP
-    {{this.$route.params.id}}
 </div>
 </template>
 

@@ -1,7 +1,6 @@
 <template>
   <div>
-      SearchList
-      {{this.$route.params.q}}
+      Orders
   </div>
 </template>
 

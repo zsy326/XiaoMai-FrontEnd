@@ -1,7 +1,7 @@
 <template>
   <div>
       CustomerInfoCenter
-      {{this.$route.params.id}}
+      
   </div>
 </template>
 

@@ -1,7 +1,6 @@
 <template>
   <div>
-      Orders
-      {{this.$route.params.id}}
+      ResetPassword
   </div>
 </template>
 

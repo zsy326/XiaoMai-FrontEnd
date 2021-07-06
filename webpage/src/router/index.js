@@ -7,52 +7,52 @@ const routes = [
   {
     path:"/BackendLogin",
     name:"BackendLogin",
-    component:() => import("../views/BackendLogin.vue")
+    component:() => import("../views/BackendRegLogin/BackendLogin.vue")
   },
   {
     path:"/SellerRegister",
     name:"SellerRegister",
-    component:() => import("../views/SellerRegister.vue")
+    component:() => import("../views/BackendRegLogin/SellerRegister.vue")
   },
   {
     path:"/",
     name:"CustomerIndex",
-    component:() => import("../views/CustomerIndex.vue"),
+    component:() => import("../views/CustomerFeatures/CustomerIndex.vue"),
     children:[
       {
         path:"/",
         name:"CustomerMain",
-        component:() => import("../views/CustomerMain.vue")
+        component:() => import("../views/CustomerFeatures/CustomerMain.vue")
       },
       {
         path:"/Category",
         name:"Category",
-        component:() => import("../views/Category.vue")
+        component:() => import("../views/CustomerFeatures/Category.vue")
       },
       {
-        path:"/CustomerInfoCenter/:id",
+        path:"/CustomerInfoCenter",
         name:"CustomerInfoCenter",
-        component:() => import("../views/CustomerInfoCenter.vue")
+        component:() => import("../views/CustomerFeatures/CustomerInfoCenter.vue")
       },
       {
-        path:"/Orders/:id",
+        path:"/Orders",
         name:"Orders",
-        component:() => import("../views/Orders.vue")
+        component:() => import("../views/CustomerFeatures/Orders.vue")
       },
       {
-        path:"/VIP/:id",
+        path:"/VIP",
         name:"VIP",
-        component:() => import("../views/VIP.vue")
+        component:() => import("../views/CustomerFeatures/VIP.vue")
       },
       {
-        path:"/ResetPassword/:id",
+        path:"/ResetPassword",
         name:"ResetPassword",
-        component:() => import("../views/ResetPassword.vue")
+        component:() => import("../views/CustomerFeatures/ResetPassword.vue")
       },
       {
-        path:"/SearchList/:q",
+        path:"/SearchList",
         name:"SearchList",
-        component:() => import("../views/SearchList.vue")
+        component:() => import("../views/CustomerFeatures/Search.vue")
       },
 
 

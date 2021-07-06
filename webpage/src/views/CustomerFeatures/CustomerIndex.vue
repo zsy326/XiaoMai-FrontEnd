@@ -31,10 +31,10 @@
   <el-dropdown v-if="isLogin">
         <el-avatar icon="el-icon-user-solid"></el-avatar> <!--以后要换成用户头像-->
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="gotoLink('/CustomerInfoCenter',1)">个人中心</el-dropdown-item>
-          <el-dropdown-item @click.native="gotoLink('/Orders',1)"> 订单管理</el-dropdown-item>
-          <el-dropdown-item @click.native="gotoLink('/VIP',1)"> 会员管理</el-dropdown-item>
-          <el-dropdown-item @click.native="gotoLink('/ResetPassword',1)">密码修改</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/CustomerInfoCenter')">个人中心</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/Orders')"> 订单管理</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/VIP')"> 会员管理</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/ResetPassword')">密码修改</el-dropdown-item>
         </el-dropdown-menu>
   </el-dropdown>
   <user-reg-login v-else></user-reg-login>
@@ -53,7 +53,8 @@
 </template>
 
 <script>
-import UserRegLogin from "./userRegLogin";
+import UserRegLogin from "../CusRegLogin/userRegLogin";
+import axios from 'axios'
 export default {
   components: {UserRegLogin},
   data() {
@@ -64,14 +65,14 @@ export default {
   computed:{
     isLogin:function(){
       return false;
-      <!--刷新页面更新这个值，或者用其他属性或者函数代替-->
+      // 刷新页面更新这个值，或者用其他属性或者函数代替
     }
   },
     methods:
     {
-      gotoLink(r,param)
+      gotoLink(r)
       {
-        this.$router.replace(r+'/'+param.toString())
+        this.$router.replace(r)
       },
       handleSearch()
       {
@@ -81,9 +82,38 @@ export default {
         }
         else
         {
-          this.gotoLink("SearchList",this.input)
+          console.log(this.input)
+          this.Search()
+          if(this.$route.path !="/SearchList")
+          {
+            this.gotoLink("/SearchList")
+          }
+          
         }
-      }
+      },
+      Search()
+    {
+      const url = '/api/Search/'+this.input
+      axios.get(url).then(
+        function(response)
+        {
+          if(response.status == 200)
+          {
+            console.log(response.data)
+          }
+          else if(response.status == 404)
+          {
+            console.log("无匹配结果")
+          }
+        }
+      )
+      .catch(
+        function(err)
+        {
+          console.log(err)
+        }
+      )
+    }
     }
   }
 </script>

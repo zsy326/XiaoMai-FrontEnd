@@ -22,8 +22,8 @@
 
 <script>
 
-import LoginForm from "@/views/loginForm";
-import RegForm from "@/views/regForm";
+import LoginForm from "@/views/CusRegLogin/loginForm";
+import RegForm from "@/views/CusRegLogin/regForm";
 export default {
   name: "userRegLogin",
   components: {RegForm, LoginForm},

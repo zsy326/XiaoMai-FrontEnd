@@ -7,7 +7,7 @@
       <el-input type="password" v-model="loginForm.pass" autocomplete="off" show-password></el-input>
     </el-form-item>
     <el-form-item style="text-align: center">
-      <el-button style="text-align: center" type="primary"  @click="submitForm('registerForm')" >登录</el-button>
+      <el-button style="text-align: center" type="primary"  @click="submitForm('loginForm')" >登录</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -25,11 +25,6 @@ export default {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'));
-      } else {
-        if (this.loginForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass');
-        }
-        callback();
       }
     };
 
@@ -52,9 +47,9 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          alert("登录成功")
         } else {
-          this.$message('登录不成功，请重试');
+          this.$message.error('登录不成功，请重试');
           return false;
         }
       });
