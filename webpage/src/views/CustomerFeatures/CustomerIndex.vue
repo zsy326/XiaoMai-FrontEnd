@@ -3,7 +3,9 @@
   <el-container>
     <el-header>
         <el-row :gutter="20" type="flex">
-             <el-col :span="5">logo</el-col> <!--放logo-->
+             <el-col :span="5">
+               <img alt="logo" src="../../../public/logo.png" width="250px"/>
+               </el-col> <!--放logo-->
 
         <el-col :span="4">
       <el-menu 
@@ -20,7 +22,7 @@
         <el-col :span="5">
             <el-input
   placeholder="搜索演出、周边"
-  v-model="input"
+  v-model="SearchInfo.input"
   clearable style="width:250px">
 </el-input>
         </el-col>
@@ -55,16 +57,23 @@
 <script>
 import UserRegLogin from "../CusRegLogin/userRegLogin";
 import axios from 'axios'
+const BaseUrl = "http://8.140.12.78:85/api";
 export default {
   components: {UserRegLogin},
   data() {
       return {
-        input: ''
+        SearchInfo:
+        {
+          input: '',
+        showInfo:Array,
+        goodsInfo:Array,
+        }
+        
       }
     },
   computed:{
     isLogin:function(){
-      return false;
+      return true;
       // 刷新页面更新这个值，或者用其他属性或者函数代替
     }
   },
@@ -82,7 +91,6 @@ export default {
         }
         else
         {
-          console.log(this.input)
           this.Search()
           if(this.$route.path !="/SearchList")
           {
@@ -93,13 +101,15 @@ export default {
       },
       Search()
     {
-      const url = '/api/Search/'+this.input
+      const url = BaseUrl+'/Search/'+this.SearchInfo.input
       axios.get(url).then(
-        function(response)
+        (response) =>
         {
           if(response.status == 200)
           {
-            console.log(response.data)
+            this.SearchInfo.showInfo = response.data.value.shows
+            console.log(response.data.value)
+            console.log(this.SearchInfo.showInfo[0].avgRate)
           }
           else if(response.status == 404)
           {
@@ -108,7 +118,7 @@ export default {
         }
       )
       .catch(
-        function(err)
+        (err)=>
         {
           console.log(err)
         }
