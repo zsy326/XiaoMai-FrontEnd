@@ -5,7 +5,7 @@
         <el-row :gutter="20" type="flex">
              <el-col :span="5">
                <img alt="logo" src="../../../public/logo.png" width="250px"/>
-               </el-col> <!--放logo-->
+               </el-col>
 
         <el-col :span="4">
       <el-menu 
@@ -22,7 +22,7 @@
         <el-col :span="5">
             <el-input
   placeholder="搜索演出、周边"
-  v-model="SearchInfo.input"
+  v-model="input"
   clearable style="width:250px">
 </el-input>
         </el-col>
@@ -37,6 +37,9 @@
           <el-dropdown-item @click.native="gotoLink('/Orders')"> 订单管理</el-dropdown-item>
           <el-dropdown-item @click.native="gotoLink('/VIP')"> 会员管理</el-dropdown-item>
           <el-dropdown-item @click.native="gotoLink('/ResetPassword')">密码修改</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/NoticeBoard')">查看通知</el-dropdown-item>
+          <el-dropdown-item id="logout">退出</el-dropdown-item>
+          <el-dropdown-item id="destroy">注销账户</el-dropdown-item>
         </el-dropdown-menu>
   </el-dropdown>
   <user-reg-login v-else></user-reg-login>
@@ -55,19 +58,13 @@
 </template>
 
 <script>
-import UserRegLogin from "../CusRegLogin/userRegLogin";
-import axios from 'axios'
-const BaseUrl = "http://8.140.12.78:85/api";
+import UserRegLogin from "../CusRegLogin/userRegLogin"
 export default {
+name:"CustomerIndex",
   components: {UserRegLogin},
   data() {
       return {
-        SearchInfo:
-        {
           input: '',
-        showInfo:Array,
-        goodsInfo:Array,
-        }
         
       }
     },
@@ -81,7 +78,7 @@ export default {
     {
       gotoLink(r)
       {
-        this.$router.replace(r)
+        this.$router.push(r)
       },
       handleSearch()
       {
@@ -91,39 +88,9 @@ export default {
         }
         else
         {
-          this.Search()
-          if(this.$route.path !="/SearchList")
-          {
-            this.gotoLink("/SearchList")
-          }
-          
+            this.gotoLink("/SearchList/"+this.input.toString())
         }
       },
-      Search()
-    {
-      const url = BaseUrl+'/Search/'+this.SearchInfo.input
-      axios.get(url).then(
-        (response) =>
-        {
-          if(response.status == 200)
-          {
-            this.SearchInfo.showInfo = response.data.value.shows
-            console.log(response.data.value)
-            console.log(this.SearchInfo.showInfo[0].avgRate)
-          }
-          else if(response.status == 404)
-          {
-            console.log("无匹配结果")
-          }
-        }
-      )
-      .catch(
-        (err)=>
-        {
-          console.log(err)
-        }
-      )
-    }
     }
   }
 </script>
@@ -137,10 +104,17 @@ export default {
     color: #333;
   }
   .el-footer {
+    text-align: center;
     line-height: 60px;
     font-size: 7px;
   }
   .el-main{
     height: 650px;
+  }
+  #logout{
+    color:red;
+  }
+  #destroy{
+    color:red;
   }
 </style>

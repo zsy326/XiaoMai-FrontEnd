@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
     </div>
-    <router-view/>
+    <router-view :key="$route.fullPath"/>
   </div>
 </template>
 
@@ -14,16 +14,13 @@
   text-align: center;
   color: #2c3e50;
 }
-
 #nav {
   padding: 0px;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: #42b983;
 }
