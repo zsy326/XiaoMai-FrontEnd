@@ -21,7 +21,7 @@
         </el-col>
         <el-col :span="5">
             <el-input
-  placeholder="搜索演出、周边"
+  placeholder="搜索演出、周边..."
   v-model="input"
   clearable style="width:250px">
 </el-input>
@@ -33,10 +33,10 @@
   <el-dropdown v-if="isLogin">
         <el-avatar icon="el-icon-user-solid"></el-avatar> <!--以后要换成用户头像-->
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="gotoLink('/CustomerInfoCenter')">个人中心</el-dropdown-item>
-          <el-dropdown-item @click.native="gotoLink('/Orders')"> 订单管理</el-dropdown-item>
-          <el-dropdown-item @click.native="gotoLink('/VIP')"> 会员管理</el-dropdown-item>
-          <el-dropdown-item @click.native="gotoLink('/ResetPassword')">密码修改</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/CustomerInfoCenter/'+id.toString())">个人中心</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/Orders/'+id.toString())"> 订单管理</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/VIP/'+id.toString())"> 会员管理</el-dropdown-item>
+          <el-dropdown-item @click.native="gotoLink('/ResetPassword/'+id.toString())">密码修改</el-dropdown-item>
           <el-dropdown-item @click.native="gotoLink('/NoticeBoard')">查看通知</el-dropdown-item>
           <el-dropdown-item id="logout">退出</el-dropdown-item>
           <el-dropdown-item id="destroy">注销账户</el-dropdown-item>
@@ -65,6 +65,7 @@ name:"CustomerIndex",
   data() {
       return {
           input: '',
+          id:1,
         
       }
     },

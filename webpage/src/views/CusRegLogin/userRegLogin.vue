@@ -15,7 +15,6 @@
         <div v-if="isLogin">没有账号？<el-button type="text" @click="change">点击注册</el-button></div>
         <div v-else>已有账号？<el-button type="text" @click="change">点击登录</el-button></div>
       </span>
-
     </el-dialog>
   </div>
 </template>
@@ -36,8 +35,8 @@ export default {
   methods:{
     change:function (){
       this.isLogin=!this.isLogin
-    }
-  }
+    },
+  },
 }
 
 

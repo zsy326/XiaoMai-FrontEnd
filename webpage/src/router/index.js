@@ -34,27 +34,27 @@ const routes = [
         component:() => import("../views/CustomerFeatures/Category.vue")
       },
       {
-        path:"/CustomerInfoCenter",
+        path:"/CustomerInfoCenter/:id",
         name:"CustomerInfoCenter",
         component:() => import("../views/CustomerFeatures/CustomerInfoCenter.vue")
       },
       {
-        path:"/Orders",
+        path:"/Orders/:id",
         name:"Orders",
         component:() => import("../views/CustomerFeatures/Orders.vue")
       },
       {
-        path:"/VIP",
+        path:"/VIP/:id",
         name:"VIP",
         component:() => import("../views/CustomerFeatures/VIP.vue")
       },
       {
-        path:"/ResetPassword",
+        path:"/ResetPassword/:id",
         name:"ResetPassword",
         component:() => import("../views/CustomerFeatures/ResetPassword.vue")
       },
       {
-        path:"/SearchList/:id",
+        path:"/SearchList/:input",
         name:"SearchList",
         component:() => import("../views/CustomerFeatures/Search.vue")
       },
