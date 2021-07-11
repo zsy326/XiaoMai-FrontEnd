@@ -42,6 +42,14 @@ export default {
     },
     created:function()
     {
+    if(sessionStorage.getItem(this.$route.params.id.toString())&& sessionStorage.getItem('userType') == 'C')
+    {
+      this.getVip()
+    }
+    else{
+      this.$message.error('无权访问！')
+      this.$router.push('/')
+    }
         this.getVip()
     },
     methods:

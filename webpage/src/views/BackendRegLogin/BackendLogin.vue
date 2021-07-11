@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name:"SellerLogin",
   data()
@@ -64,7 +65,7 @@ export default {
       }
       else
       {
-        alert("匹配数据库中SELLER表")
+       this.handleSellerLogin()
       }
     },
     adminLogin()
@@ -79,9 +80,47 @@ export default {
       }
       else
       {
-        alert("匹配数据库ADMIN表")
+        this.handleAdminLogin()
       }
-    }
+    },
+    async handleSellerLogin()
+    {
+      const url ='/Login'
+      await axios.post(url,{id:this.user.id,password:this.user.password,userType:'SELLER'})
+      .then(
+        (response) =>
+        {
+          this.$message.success('登录成功！')
+          this.$router.push("/Sellerhome/"+this.user.id.toString())
+        }
+      ).catch(
+        (err) =>{
+          this.$message.error('账号或密码错误！')
+          console.log(err)
+        }
+      )
+      
+    },
+    async handleAdminLogin()
+    {
+      const url ='/Login'
+      await axios.post(url,{id:this.user.id,password:this.user.password,userType:'ADMIN'})
+      .then(
+        (response) =>
+        {
+          this.$message.success('登录成功！')
+          // this.$router.push("/Sellerhome/"+this.user.id.toString())
+        }
+      ).catch(
+        (err) =>{
+          this.$message.error('账号或密码错误！')
+          console.log(err)
+        }
+      )
+      
+    },
+
+    
   }
 
 }

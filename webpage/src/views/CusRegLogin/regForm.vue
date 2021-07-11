@@ -17,12 +17,16 @@
 
 
 <script>
+  import axios from 'axios'
   export default {
   data() {
   var checkAccount = (rule, value, callback) => {
   if (!value) {
   return callback(new Error('用户名不能为空'));
 }
+  else{
+    callback()
+  }
   };
   var validatePass = (rule, value, callback) => {
   if (value === '') {
@@ -66,13 +70,30 @@
   submitForm(formName) {
   this.$refs[formName].validate((valid) => {
   if (valid) {
-  alert('submit!');
+  this.Register()
 } else {
   this.$message.error('注册不成功，请重试');
   return false;
 }
 });
-}
+},
+  async Register()
+  {
+    const url = '/SignUp'
+    await axios.post(url,{userName:this.registerForm.account,password:this.registerForm.pass,userType:'CUSTOMER'})
+    .then(
+      (response) =>
+      {
+        this.$message.success("注册成功！"+"您的账号是"+response.data)
+        location.reload()
+      }
+    ).catch(
+      (err) =>
+      {
+        this.$message.error("未知错误")
+      }
+    )
+  }
 }
 }
 </script>

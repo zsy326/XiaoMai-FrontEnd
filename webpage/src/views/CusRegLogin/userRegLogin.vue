@@ -29,7 +29,7 @@ export default {
   data(){
     return{
       centerDialogVisible:false,
-      isLogin:true
+      isLogin:false
     }
   },
   methods:{

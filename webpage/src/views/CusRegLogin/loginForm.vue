@@ -14,6 +14,7 @@
 
 
 <script>
+import axios from 'axios'
 export default {
   name: "loginForm",
   data() {
@@ -21,10 +22,16 @@ export default {
       if (!value) {
         return callback(new Error('账号不能为空'));
       }
+      else{
+        callback()
+      }
     };
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'));
+      }
+      else{
+        callback()
       }
     };
 
@@ -47,12 +54,37 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("登录成功")
+         this.handleLogin()
         } else {
           this.$message.error('登录不成功，请重试');
           return false;
         }
       });
+    },
+    async handleLogin()
+    {
+     
+      const url = '/Login'
+      await axios.post(url,{id:this.loginForm.account.toString(),password:this.loginForm.pass,userType:'CUSTOMER'})
+      .then(
+        (response) =>
+        {
+          this.$message.success("登录成功")
+          console.log(response.data)
+          sessionStorage.setItem('cusId',this.loginForm.account)
+          sessionStorage.setItem(this.loginForm.account.toString(),response.data)
+          sessionStorage.setItem('isLogin',true)
+          sessionStorage.setItem('userType','C')
+          location.reload()
+        }
+      )
+      .catch(
+        (err) =>
+        {
+          this.$message.error("账号或密码错误！")
+          console.log(err)
+        }
+      )
     }
   },
 }

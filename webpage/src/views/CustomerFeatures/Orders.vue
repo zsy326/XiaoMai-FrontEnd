@@ -33,7 +33,14 @@ export default {
   },
   created:function()
   {
-    this.getAllOrders()
+    if(sessionStorage.getItem(this.$route.params.id.toString())&& sessionStorage.getItem('userType') == 'C')
+    {
+       this.getAllOrders()
+    }
+    else{
+      this.$message.error('无权访问！')
+      this.$router.push('/')
+    }
   },
   methods:
   {
