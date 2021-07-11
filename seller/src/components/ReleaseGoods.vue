@@ -21,13 +21,15 @@
 
       <el-form-item label="周边简介" prop="introduction">
        
-      
-      <el-input
-  type="textarea"
-  :rows="4"
-  placeholder="请输入简介"
-  v-model="ruleForm.introduction">
-</el-input>
+      <el-col style="width: 600px">
+          <el-input
+            type="textarea"
+            :rows="4"
+            placeholder="请输入简介"
+            v-model="ruleForm.introduction"
+          >
+          </el-input>
+      </el-col>
 
       </el-form-item>
 
@@ -104,34 +106,6 @@ export default {
             trigger: "blur",
           },
         ],
-        address: [
-          { required: true, message: "请输入演出地址", trigger: "blur" },
-          {
-            min: 1,
-            max: 20,
-            message: "长度在 1 到 20 个字符",
-            trigger: "blur",
-          },
-        ],
-        tag1: [
-          { required: true, message: "请选择一个标签", trigger: "change" },
-        ],
-        date1: [
-          {
-            type: "date",
-            required: true,
-            message: "请选择日期",
-            trigger: "change",
-          },
-        ],
-        date2: [
-          {
-            type: "date",
-            required: true,
-            message: "请选择时间",
-            trigger: "change",
-          },
-        ],
       },
       imageUrl: "",
     };
@@ -196,7 +170,7 @@ export default {
 .goods-uploader-icon {
   font-size: 28px;
   color: #8c939d;
-  background-color: rgba(175, 180, 201, 0.192);
+  background-color: rgba(175, 180, 201, 0.404);
   width: 178px;
   height: 178px;
   line-height: 178px;
@@ -209,7 +183,8 @@ export default {
 }
 
 .note {
-  margin-left: 10px;
+  margin-left: 20px;
+  margin-top: 20px;
   margin-bottom: 20px;
   color: rgb(49, 168, 189);
   font-size: 20px;

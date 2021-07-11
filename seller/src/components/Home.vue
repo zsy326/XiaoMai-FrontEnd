@@ -1,7 +1,6 @@
 <template>
-  <div class="home-container">
-    <el-container class="biggest-box" height="100%">
-      <el-aside class="aside-box" width="280px" height="900px">
+    <el-container  class="home-container" height="100%">
+      <el-aside class="aside-box" width="260px" height="100%">
         <div class="logo">
           <img src="../assets/images/logo.jpg" alt="" />
         </div>
@@ -10,7 +9,7 @@
           <!--侧边导航栏-->
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-s-data"></i>首页</template>
-            <router-link to="/outline">
+            <router-link  to="/outline">
               <el-menu-item index="1-1">概要信息</el-menu-item>
             </router-link>
           </el-submenu>
@@ -19,6 +18,9 @@
 
             <router-link to="/slotList">
               <el-menu-item index="2-1">演出列表</el-menu-item>
+            </router-link>
+            <router-link to="/goodsList">
+              <el-menu-item index="2-2">周边列表</el-menu-item>
             </router-link>
           </el-submenu>
           <el-submenu index="3">
@@ -65,7 +67,7 @@
       <el-container>
         <!-- <el-header> -->
           <el-header type="flex" class="row-bg" justify="space-between">
-            <el-col :span="6"
+            <el-col :span="5"
               ><div>
                 <span id="ID">商家管理系统</span>
               </div></el-col
@@ -84,12 +86,15 @@
                       alt="">
             </el-col>
           </el-header>
-          
+      <el-container class="main">
+        <div class="router">
         <router-view> </router-view>
-        <el-footer>Footer</el-footer>
+        </div>
+         <el-footer>Footer</el-footer>
+    </el-container>
+       
       </el-container>
     </el-container>
-  </div>
 </template>
 
 <script>
@@ -105,16 +110,15 @@ export default {};
 
 .el-header {
   height: 20px;
-  background-color: #df5f39d0;
+  background-color: #1d597c;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
 }
 img {
-  width: 280px;
-  height: 70px;
-  /* margin-right: 45px; */
+  margin-left: 10px;
+  width: 230px;
+  height: 60px;
 }
 
 #ID {
@@ -126,23 +130,52 @@ img {
 #user-avatar {
   width: 45px;
   height: 45px;
-  border-radius: 10px;
-  margin-right: 0;
+  border-radius: 30px;
 }
 #user-name {
   color:rgb(255, 255, 255);
   font-weight: bold;
   font-size: 20px;
-  margin-left: 0px;
-}
-
-.el-main {
-  position: relative;
-  background-color: #b5b7c0;
 }
 
 .aside-box {
-  background-color: rgb(248, 248, 248);
+  background-color: #ffffff;
+  height:100vh;
+}
+.menu-box{
+  background-color: #fdfdfd;
+  
+
+}
+.el-menu-item{
+  font-size: 15px;
+   border-bottom:none !important;
 }
 
+.el-menu-item.is-active {
+      background-color: #1d597ca2 !important;
+      color: #fff;
+        border-bottom: none;
+    }
+    
+.main{
+  /* background-color: #6e82b93d; */
+  background-color: #fff;
+  position:relative;  
+  width:100%;
+  padding-bottom: 20px;  
+  /* box-sizing: border-box; */
+}
+
+.el-footer{
+    height:20px; 
+     width: 100%;      
+    position:absolute;
+    bottom:0px;
+    background-color:#1d597ca2
+}
+.router{
+  margin-bottom: 50px;
+  background-color: rgb(255, 255, 255);
+}
 </style>

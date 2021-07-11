@@ -1,8 +1,6 @@
 <template>
   <div>
-     <div class="note" >
-   请填写您将要发布的演出的相关信息噢！ 
-  </div>
+    <div class="note">请填写您将要发布的演出的相关信息噢！</div>
     <el-form
       :model="ruleForm"
       :rules="rules"
@@ -15,13 +13,15 @@
       </el-form-item>
 
       <el-form-item label="演出简介" prop="introduction">
-         
-      <el-input
-  type="textarea"
-  :rows="4" 
-  placeholder="请输入简介"
-  v-model="ruleForm.introduction">
-</el-input>
+        <el-col style="width: 600px">
+          <el-input
+            type="textarea"
+            :rows="4"
+            placeholder="请输入简介"
+            v-model="ruleForm.introduction"
+          >
+          </el-input>
+        </el-col>
       </el-form-item>
 
       <el-form-item label="演出地址" prop="address">
@@ -297,7 +297,7 @@ export default {
 .seat-uploader-icon {
   font-size: 28px;
   color: #8c939d;
-  background-color: rgba(175, 180, 201, 0.212);
+  background-color: rgba(175, 180, 201, 0.404);
   width: 178px;
   height: 178px;
   line-height: 178px;
@@ -309,16 +309,15 @@ export default {
   display: block;
 }
 
-.el-input{
-    width: 600px;
+.el-input {
+  width: 600px;
 }
-.note{
-    margin-left: 10px;
-    margin-bottom: 20px;
-    color: rgb(49, 168, 189);
-    font-size: 20px;
-    font-weight: bold;
-    
+.note {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: rgb(49, 168, 189);
+  font-size: 20px;
+  font-weight: bold;
 }
-
 </style>

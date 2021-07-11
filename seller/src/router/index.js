@@ -21,6 +21,10 @@ const routes = [
       component: resolve => require(['../components/SlotList.vue'], resolve),
     },
     {
+      path: '/goodsList',
+      component: resolve => require(['../components/GoodsList.vue'], resolve),
+    },
+    {
       path: '/notification',
       component: resolve => require(['../components/Notification.vue'], resolve),
     },
