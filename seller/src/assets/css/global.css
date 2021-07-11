@@ -5,3 +5,19 @@ body,
     margin:0;
     padding:0;
 }
+
+.el-breadcrumb{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+  }
+   
+  .router-link-active {
+    text-decoration: none;
+  }
+   

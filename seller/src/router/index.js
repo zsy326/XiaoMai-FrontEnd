@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path:'/',
-    redirect:'/home'
+    redirect:'/outline'
   },
   {
     path: "/home",
@@ -31,7 +31,7 @@ const routes = [
     {
       path: '/editInfo',
       component: resolve => require(['../components/EditInfo.vue'], resolve),
-    },
+      },
     {
       path: '/releaseSlot',
       component: resolve => require(['../components/ReleaseSlot.vue'], resolve),

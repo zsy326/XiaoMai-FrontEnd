@@ -1,6 +1,13 @@
 <template>
     <div>
-  <el-button class="display-all" @click="clearFilter">显示所有通知(取消筛选)</el-button>
+      <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/outline' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>历史通知</el-breadcrumb-item>
+      <el-breadcrumb-item>通知列表</el-breadcrumb-item>
+    </el-breadcrumb>
+
+  <el-card class="box-card" shadow="always">
+  <el-button class="display-all" @click="clearFilter" >显示所有通知(取消筛选)</el-button>
   <el-table
     ref="filterTable"
     :data="tableData"
@@ -33,6 +40,7 @@
       </template>
     </el-table-column>
   </el-table>
+  </el-card>
     </div>
 </template>
 
@@ -91,6 +99,12 @@ export default {
 
 
 <style scoped>
+.el-card {
+  margin-left: 15px;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
 .el-button{
     margin-left: 10px;
     margin-top: 30px;

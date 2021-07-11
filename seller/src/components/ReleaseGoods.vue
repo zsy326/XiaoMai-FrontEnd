@@ -1,5 +1,12 @@
 <template>
-  <div>
+<div>
+   <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/outline' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>我要发布</el-breadcrumb-item>
+      <el-breadcrumb-item>发布周边</el-breadcrumb-item>
+    </el-breadcrumb>
+  <el-card class="box-card" shadow="always">
+    
   <div class="note" >
    请填写您将要发布的周边的相关信息噢！ 
   </div>
@@ -55,7 +62,8 @@
         </el-upload>
       </el-form-item>
     </el-form>
-  </div>
+  </el-card>
+</div>
 </template>
 
 <script>
@@ -157,6 +165,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.el-card{
+  margin-left:15px;
+  margin-top:15px;
+  margin-right:15px;
+}
 .goods-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
@@ -183,8 +197,7 @@ export default {
 }
 
 .note {
-  margin-left: 20px;
-  margin-top: 20px;
+  margin-left: 10px;
   margin-bottom: 20px;
   color: rgb(49, 168, 189);
   font-size: 20px;

@@ -24,7 +24,7 @@
             </router-link>
           </el-submenu>
           <el-submenu index="3">
-            <template slot="title"
+            <template class="first" slot="title"
               ><i class="el-icon-upload2"></i>我要发布</template
             >
 
@@ -90,7 +90,11 @@
         <div class="router">
         <router-view> </router-view>
         </div>
-         <el-footer>Footer</el-footer>
+         <el-footer>
+           <span id="p1" >小麦网简体中文版提供的内容仅用于课程设计作业，不保证数据的真实性。通过观看本站内容随之而来的风险与本站无关。</span>
+            <a href="https://github.com/SchweitzerGAO/XiaoMai-FrontEnd" class="github">我们的github地址</a>
+           
+         </el-footer>
     </el-container>
        
       </el-container>
@@ -144,8 +148,6 @@ img {
 }
 .menu-box{
   background-color: #fdfdfd;
-  
-
 }
 .el-menu-item{
   font-size: 15px;
@@ -168,7 +170,6 @@ img {
 }
 
 .el-footer{
-    height:20px; 
      width: 100%;      
     position:absolute;
     bottom:0px;
@@ -176,6 +177,17 @@ img {
 }
 .router{
   margin-bottom: 50px;
-  background-color: rgb(255, 255, 255);
+}
+#p1{
+  margin-top:20px;
+  color: #fff;
+  font-size: 18px;
+  margin-left: 25%;
+}
+.github{
+  margin-top:15px;
+  color: rgb(31, 70, 94);
+  font-size: 15px;
+  margin-left: 45%;
 }
 </style>
