@@ -68,9 +68,9 @@
 
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="添加场次" prop="sessionNum">
+            <el-form-item label="添加场次" prop="slotNum">
               <el-input-number
-                v-model="sessionNum"
+                v-model="slotNum"
                 controls-position="right"
                 @change="handleChange1"
                 :min="1"
@@ -92,6 +92,8 @@
           ></el-col>
         </el-row>
 
+
+<div class="time">
         <el-form-item label="开始时间" required>
           <el-col :span="6">
             <el-form-item prop="date1">
@@ -136,6 +138,7 @@
             </el-form-item>
           </el-col>
         </el-form-item>
+</div>
 
         <el-form-item label="添加分区" prop="areaNum">
           <el-input-number
@@ -205,10 +208,7 @@ export default {
         resource: "",
         desc: "",
         value: [],
-        sessionNum: 1,
-        areaNum: 1,
-        seatNum: 1,
-        price: 0,
+       
          options: [
         {
           value: "1",
@@ -228,6 +228,10 @@ export default {
         },
       ],
       },
+       slotNum: 1,
+        areaNum: 1,
+        seatNum: 1,
+        price: 0,
       rules: {
         name: [
           { required: true, message: "请输入演出名称", trigger: "blur" },

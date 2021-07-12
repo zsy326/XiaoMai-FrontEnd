@@ -44,7 +44,7 @@
         <el-input-number
           v-model="price"
           controls-position="right"
-          @change="handleChange4"
+          @change="handleChange1"
           :min="0"
         ></el-input-number>
       </el-form-item>
@@ -134,15 +134,6 @@ export default {
     },
     handleChange1(value) {
       console.log1(value);
-    },
-    handleChange2(value) {
-      console.log2(value);
-    },
-    handleChange3(value) {
-      console.log3(value);
-    },
-    handleChange4(value) {
-      console.log4(value);
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);

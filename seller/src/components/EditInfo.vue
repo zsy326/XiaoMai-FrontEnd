@@ -135,7 +135,7 @@
       </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="editName = false">取 消</el-button>
-        <el-button type="primary" @click="editName = false;submitForm('ruleForm')">确 定</el-button>
+        <el-button type="primary" @click="submitName('ruleForm')">确 定</el-button>
       </div>
     </el-dialog>
     
@@ -168,12 +168,12 @@
       </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="editPasswrd = false">取 消</el-button>
-        <el-button type="primary" @click="editPasswrd = false;submitForm('ruleForm')">确 定</el-button>
+        <el-button type="primary" @click="submitPasswrd('ruleForm')">确 定</el-button>
       </div>
     </el-dialog>
 
      <!-- 更改地址的对话框 -->
-     <el-dialog title="更改名称" :visible.sync="editAddress" width="500px" @close="editClosed">
+     <el-dialog title="更改地址" :visible.sync="editAddress" width="500px" @close="editClosed">
       <div>
         <el-form
           :model="ruleForm"
@@ -193,7 +193,7 @@
       </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="editAddress = false">取 消</el-button>
-        <el-button type="primary" @click="editAddress = false;submitForm('ruleForm')">确 定</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -218,7 +218,7 @@
       </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="editIntroduction = false">取 消</el-button>
-        <el-button type="primary" @click="editIntroduction = false;submitForm('ruleForm')">确 定</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -239,7 +239,7 @@
       </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="editLogo = false">取 消</el-button>
-        <el-button type="primary" @click="editLogo = false;submitForm('ruleForm')">确 定</el-button>
+        <el-button type="primary" @click="submitLogo('ruleForm')">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -301,7 +301,7 @@ export default {
           {
             min: 3,
             max: 50,
-            message: "长度在 1 到 50 个字符",
+            message: "长度在 3 到 50 个字符",
             trigger: "blur",
           }],
           address: [
@@ -326,12 +326,65 @@ export default {
   },
   
   methods: {
-    submitForm(formName) {
+    submitName(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-             this.$message({
+              this.editName = false;
+              this.$message({
             type: 'success',
-            message: '修改成功',
+            message: '名称修改成功',
+          })
+          }else{
+            return false;
+          } 
+        });
+      },
+       submitPasswrd(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+              this.editPasswrd = false;
+              this.$message({
+            type: 'success',
+            message: '密码修改成功',
+          })
+          }else{
+            return false;
+          } 
+        });
+      },
+       submitAddress(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+              this.editAddress = false;
+              this.$message({
+            type: 'success',
+            message: '地址修改成功',
+          })
+          }else{
+            return false;
+          } 
+        });
+      },
+      submitIntroduction(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+              this.editIntroduction = false;
+              this.$message({
+            type: 'success',
+            message: '介绍修改成功',
+          })
+          }else{
+            return false;
+          } 
+        });
+      },
+      submitLogo(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+              this.editLogo = false;
+              this.$message({
+            type: 'success',
+            message: 'Logo修改成功',
           })
           }else{
             return false;
