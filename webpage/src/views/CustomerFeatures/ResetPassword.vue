@@ -1,11 +1,13 @@
 <template>
   <div>
-      Main
+      ResetPassword
   </div>
 </template>
 
 <script>
+export default {
 
+}
 </script>
 
 <style>

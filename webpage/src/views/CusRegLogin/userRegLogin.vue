@@ -15,29 +15,28 @@
         <div v-if="isLogin">没有账号？<el-button type="text" @click="change">点击注册</el-button></div>
         <div v-else>已有账号？<el-button type="text" @click="change">点击登录</el-button></div>
       </span>
-
     </el-dialog>
   </div>
 </template>
 
 <script>
 
-import LoginForm from "@/views/loginForm";
-import RegForm from "@/views/regForm";
+import LoginForm from "@/views/CusRegLogin/loginForm";
+import RegForm from "@/views/CusRegLogin/regForm";
 export default {
   name: "userRegLogin",
   components: {RegForm, LoginForm},
   data(){
     return{
       centerDialogVisible:false,
-      isLogin:true
+      isLogin:false
     }
   },
   methods:{
     change:function (){
       this.isLogin=!this.isLogin
-    }
-  }
+    },
+  },
 }
 
 
