@@ -30,7 +30,7 @@
             <el-button
               icon="el-icon-edit"
               circle
-              size="mini"
+              size="normal"
               @click="editName=true"
             ></el-button>
           </div>
@@ -45,17 +45,17 @@
             <el-button
               icon="el-icon-edit"
               circle
-              size="mini"
+              size="normal"
               @click="editPasswrd = true"
             ></el-button>
           </div>
         </el-col>
       </el-row>
 
-      <el-row type="flex" class="address" justify="space-around">
-        <el-col :span="8"><div>商家地址</div></el-col>
+      <el-row  type="flex" class="PhoneNumber" justify="space-around">
+        <el-col :span="8"><div>商家电话</div></el-col>
         <el-col :span="12"
-          ><div>{{ address }}</div></el-col
+          ><div>{{ phoneNumber }}</div></el-col
         >
 
         <el-col :span="2"
@@ -63,8 +63,8 @@
             <el-button
               icon="el-icon-edit"
               circle
-              size="mini"
-              @click="editAddress=true"
+              size="normal"
+              @click="editPhoneNumber=true"
             ></el-button>
           </div>
         </el-col>
@@ -73,7 +73,7 @@
       <el-row type="flex" class="introduction" justify="space-around">
         <el-col :span="8"><div>商家简介</div></el-col>
         <el-col :span="12"
-          ><div>{{ introduction }}</div></el-col
+          ><div style="max-width:350px">{{ introduction }}</div></el-col
         >
 
         <el-col :span="2"
@@ -81,7 +81,7 @@
             <el-button
               icon="el-icon-edit"
               circle
-              size="mini"
+              size="normal"
               @click="editIntroduction=true"
             ></el-button>
           </div>
@@ -104,7 +104,7 @@
         <el-button
                 icon="el-icon-edit"
                 circle
-                size="mini"
+                size="normal"
                 @click="editLogo=true"
               ></el-button>
                </div>
@@ -172,8 +172,8 @@
       </div>
     </el-dialog>
 
-     <!-- 更改地址的对话框 -->
-     <el-dialog title="更改地址" :visible.sync="editAddress" width="500px" @close="editClosed">
+     <!-- 更改电话的对话框 -->
+     <el-dialog title="更改电话" :visible.sync="editPhoneNumber" width="500px" @close="editClosed">
       <div>
         <el-form
           :model="ruleForm"
@@ -182,17 +182,17 @@
           ref="ruleForm"
           label-width="125px"
         >
-          <el-form-item label="请输入新的地址" prop="address">
+          <el-form-item label="请输入新的电话" prop="PhoneNumber">
             <el-input
-              type="address"
-              v-model="ruleForm.address"
+              type="PhoneNumber"
+              v-model="ruleForm.PhoneNumber"
               autocomplete="off"
             ></el-input>
           </el-form-item>
         </el-form>
       </div>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="editAddress = false">取 消</el-button>
+        <el-button @click="editPhoneNumber = false">取 消</el-button>
         <el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
       </div>
     </el-dialog>
@@ -274,28 +274,21 @@ export default {
       name: "TJ影城",
       introduction:
         "是一家优秀的电影院，创办于1907年，口碑极佳，在大众点评上连续3年获得‘嘉定区最佳电影院’",
-      address: "上海市嘉定区曹安公路4800号",
+      phoneNumber: 1234567,
       editName:false,
       editPasswrd: false,
-      editAddress:false,
+      editPhoneNumber:false,
       editIntroduction:false,
       editLogo:false,
 
        ruleForm: {
-          pass: '',
-          checkPass: '',
           name:'',
-          address:'',
+          passwrd:'',
+          phoneNumber:'',
           introduction:'',
           imageUrl: "",
         },
         rules: {
-          pass: [
-            { validator: validatePass, trigger: 'blur' }
-          ],
-          checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
-          ],
           name: [
           { required: true, trigger: "blur" },
           {
@@ -304,12 +297,12 @@ export default {
             message: "长度在 3 到 50 个字符",
             trigger: "blur",
           }],
-          address: [
+          phoneNumber: [
           { required: true, trigger: "blur" },
           {
-            min: 5,
-            max: 50,
-            message: "长度在 5 到 50 个字符",
+            // min: 5,
+            // max: 50,
+            // message: "长度在 5 到 50 个字符",
             trigger: "blur",
           }],
           introduction: [
@@ -352,10 +345,10 @@ export default {
           } 
         });
       },
-       submitAddress(formName) {
+       submitPhoneNumber(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-              this.editAddress = false;
+              this.editPhoneNumber = false;
               this.$message({
             type: 'success',
             message: '地址修改成功',

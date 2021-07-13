@@ -41,6 +41,10 @@ const routes = [
       component: resolve => require(['../components/ReleaseGoods.vue'], resolve),
     },
     {
+      path: '/releaseShow',
+      component: resolve => require(['../components/ReleaseShow.vue'], resolve),
+    },
+    {
       path: '/orderList',
       component: resolve => require(['../components/OrderList.vue'], resolve),
     },

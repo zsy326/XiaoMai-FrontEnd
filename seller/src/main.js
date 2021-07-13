@@ -4,14 +4,16 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import router from './router'
 import './assets/css/global.css'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import qs from 'qs'
 
-// import axios from 'axios'
-// axios.defaults.baseURL='http://8.140.12.78:85'
-// Vue.prototype.$http=axios;
+axios.defaults.baseURL = "http://8.140.12.78:85/api"
 
-
-//import VueRouter from 'vue-router'
+Vue.use(VueAxios,axios)
 Vue.use(ElementUI)
+Vue.use(qs)
+
 Vue.config.productionTip = false
 
 new Vue({

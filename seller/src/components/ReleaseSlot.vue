@@ -3,190 +3,173 @@
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/outline' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>我要发布</el-breadcrumb-item>
-      <el-breadcrumb-item>发布演出</el-breadcrumb-item>
+      <el-breadcrumb-item>发布场次</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-card>
-      <div class="note">请填写您将要发布的演出的相关信息噢！</div>
+    <el-card class="addCard">
+      <div class="note">请填写您将要发布的场次的相关信息噢！</div>
       <el-form
-        :model="ruleForm"
+        :model="slotForm"
         :rules="rules"
-        ref="ruleForm"
-        label-width="120px"
-        class="demo-ruleForm"
+        ref="slotForm"
+        label-width="80px"
+         label-position=left
+        class="demo-slotForm"
       >
-        <el-form-item label="演出名称" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
-        </el-form-item>
-
-        <el-form-item label="演出简介" prop="introduction">
-          <el-col style="width: 600px">
-            <el-input
-              type="textarea"
-              :rows="4"
-              placeholder="请输入简介"
-              v-model="ruleForm.introduction"
-            >
-            </el-input>
-          </el-col>
-        </el-form-item>
-
-        <el-form-item label="演出地址" prop="address">
-          <el-input v-model="ruleForm.address"></el-input>
-        </el-form-item>
-
-        <el-form-item label="必选标签" prop="tag1">
-          <el-select v-model="ruleForm.tag1" placeholder="请选择该演出的分类">
-            <el-option label="音乐会" value="1"></el-option>
-            <el-option label="话剧歌剧" value="2"></el-option>
-            <el-option label="演唱会" value="3"></el-option>
-            <el-option label="曲苑杂坛" value="4"></el-option>
-            <el-option label="展览休闲" value="5"></el-option>
-            <el-option label="舞蹈芭蕾" value="6"></el-option>
-            <el-option label="体育" value="7"></el-option>
-            <el-option label="其他" value="8"></el-option>
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="其他标签 （多选）" prop="region">
-          <el-select
-            v-model="value"
-            multiple
-            filterable
-            allow-create
-            default-first-option
-            placeholder="请选择其他标签"
-          >
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
+        <el-form-item label="演出 ID" prop="id">
+          <el-input v-model="slotForm.id"></el-input>
         </el-form-item>
 
         <el-row :gutter="20">
           <el-col :span="12">
             <el-form-item label="添加场次" prop="slotNum">
-              <el-input-number
-                v-model="slotNum"
-                controls-position="right"
-                @change="handleChange1"
-                :min="1"
-                :max="50"
-              ></el-input-number>
+              <el-button
+                @click="addSlot = true"
+                icon="el-icon-circle-plus-outline"
+                style="margin-left: 0px; background-color: "
+              >
+                点击增加场次
+              </el-button>
             </el-form-item>
-            <div class="grid-content bg-purple"></div
-          ></el-col>
-
-          <el-col :span="12">
-            <el-button
-              @click="drawer = true"
-              type="primary"
-              style="margin-left: 16px"
-            >
-              点击确认
-            </el-button>
-            <div class="grid-content bg-purple"></div
-          ></el-col>
+          </el-col>
         </el-row>
 
-
-<div class="time">
-        <el-form-item label="开始时间" required>
-          <el-col :span="6">
-            <el-form-item prop="date1">
-              <el-date-picker
-                type="date"
-                placeholder="日期"
-                v-model="ruleForm.date1"
-                style="width: 100%"
-              ></el-date-picker>
-            </el-form-item>
-          </el-col>
-          <el-col class="line" :span="2">-</el-col>
-          <el-col :span="6">
-            <el-form-item prop="date2">
-              <el-time-picker
-                placeholder="时间"
-                v-model="ruleForm.date2"
-                style="width: 100%"
-              ></el-time-picker>
-            </el-form-item>
-          </el-col>
-        </el-form-item>
-        <el-form-item label="结束时间" required>
-          <el-col :span="6">
-            <el-form-item prop="date1">
-              <el-date-picker
-                type="date"
-                placeholder="日期"
-                v-model="ruleForm.date1"
-                style="width: 100%"
-              ></el-date-picker>
-            </el-form-item>
-          </el-col>
-          <el-col class="line" :span="2">-</el-col>
-          <el-col :span="6">
-            <el-form-item prop="date2">
-              <el-time-picker
-                placeholder="时间"
-                v-model="ruleForm.date2"
-                style="width: 100%"
-              ></el-time-picker>
-            </el-form-item>
-          </el-col>
-        </el-form-item>
-</div>
-
-        <el-form-item label="添加分区" prop="areaNum">
-          <el-input-number
-            v-model="areaNum"
-            controls-position="right"
-            @change="handleChange2"
-            :min="1"
-            :max="50"
-          ></el-input-number>
-        </el-form-item>
-        <el-form-item label="座位数" prop="seatNum">
-          <el-input-number
-            v-model="seatNum"
-            controls-position="right"
-            @change="handleChange3"
-            :min="1"
-          ></el-input-number>
-        </el-form-item>
-        <el-form-item label="票价（RMB）" prop="price">
-          <el-input-number
-            v-model="price"
-            controls-position="right"
-            @change="handleChange4"
-            :min="0"
-          ></el-input-number>
-        </el-form-item>
-
-        <el-form-item label="上传座位图" prop="areaNum">
-          <el-upload
-            class="img-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
-          >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-            <i v-else class="el-icon-plus seat-uploader-icon"></i>
-          </el-upload>
-        </el-form-item>
-
         <el-form-item>
-          <el-button type="primary" @click="submit(ruleForm)"
+          <el-button type="primary" @click="submit(slotForm)"
             >立即发布</el-button
           >
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
+          <el-button @click="resetForm('slotForm')">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
+
+    <!-- 增加场次的对话框 -->
+    <el-dialog
+      title="增加场次"
+      :visible.sync="addSlot"
+      width="900px"
+      @close="editClosed"
+    >
+      <div>
+        <el-form
+          :model="slotForm"
+          :rules="rules"
+          ref="slotForm"
+          label-width="95px"
+           label-position=left
+          class="demo-slotForm"
+        >
+          <el-form-item label="场次日期" required>
+            <el-col :span="6">
+              <el-form-item prop="day">
+                <el-date-picker
+                  type="date"
+                  placeholder="日期"
+                  v-model="slotForm.day"
+                  style="width: 150px"
+                ></el-date-picker>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+
+          <el-form-item label="起止时间" required>
+            <el-col :span="6">
+              <el-form-item prop="timeStart">
+                <el-time-picker
+                  placeholder="开始时间"
+                  v-model="slotForm.timeStart"
+                  style="width: 200px"
+                ></el-time-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item prop="timeEnd">
+                <el-time-picker
+                  placeholder="结束时间"
+                  v-model="slotForm.timeEnd"
+                  style="width: 200px"
+                ></el-time-picker>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+
+          <!-- 分区信息列表 -->
+          <el-card class="AreaList">
+            	<el-form  :model="area"  :rules="areaRules" :ref="`ruleForm${index}`">
+                 <el-row
+              type="flex"
+              justify="space-between"
+              v-for="(area,index) in slotForm.areas"
+               :label="index"
+              :key="area.key"
+            >
+              <el-col span="10">
+                <el-form-item label="分区名称" prop="name">
+                  <el-input v-model="area.value" style="width: 80px"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col span="10"
+                ><el-form-item label="座位数" prop="available">
+                  <el-input-number
+                    v-model="area.value"
+                    controls-position="right"
+                    @change="handleavailable"
+                    style="width: 120px"
+                    :min="1"
+                  ></el-input-number> </el-form-item
+              ></el-col>
+              <el-col span="10"
+                ><el-form-item label="票价" prop="price">
+                  <el-input-number
+                    v-model="slotForm.areas.price"
+                    controls-position="right"
+                    @change="handlePrice"
+                    style="width: 120px"
+                    :min="0"
+                  ></el-input-number> </el-form-item
+              ></el-col>
+              
+              <el-col span="10"
+                ><el-button type="danger" @click.prevent="removeArea(area)"
+                  >删除</el-button
+                ></el-col
+              >
+          </el-row>
+          </el-form>
+          </el-card>
+          <el-form-item
+            required
+            label="添加分区"
+            style="margin-top: 20px"
+          >
+            <el-button
+              @click="addAreas"
+              type="primary"
+              style="margin-left: 0px"
+            >
+              点击增分区
+            </el-button>
+          </el-form-item>
+          <el-form-item label="上传座位图" required>
+            <el-upload
+              class="img-uploader"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+            >
+              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <i v-else class="el-icon-plus seat-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+        </el-form>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addSlot = false">取 消</el-button>
+        <el-button type="primary" @click="submitSlot('slotForm')"
+          >确 定</el-button
+        >
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -198,64 +181,46 @@ export default {
   },
   data() {
     return {
-      ruleForm: {
-        name: "喵喵",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: "",
-        value: [],
-       
-         options: [
-        {
-          value: "1",
-          label: "爆笑",
-        },
-        {
-          value: "2",
-          label: "催泪",
-        },
-        {
-          value: "3",
-          label: "惊悚",
-        },
-        {
-          value: "4",
-          label: "爱情",
-        },
-      ],
+      slotForm: {
+        areas: [
+          {
+            name: "",
+            available: 0,
+             price: 0,
+          },
+        ],
+        day: "",
+        timeStart: "",
+        timeEnd: "",
       },
-       slotNum: 1,
-        areaNum: 1,
-        seatNum: 1,
-        price: 0,
+      areaNum: 1,
+      available: 1,
+      addSlot: false,
       rules: {
-        name: [
-          { required: true, message: "请输入演出名称", trigger: "blur" },
-          {
-            min: 1,
-            max: 50,
-            message: "长度在 1 到 50 个字符",
-            trigger: "blur",
-          },
+        day: [{ required: true, trigger: "blur" }],
+        timeStart: [{ required: true, trigger: "blur" }],
+        timeEnd: [{ required: true, trigger: "blur" }],
+        name: [{ required: true, trigger: "blur" }],
+      },
+      areaRules:{
+        name:[
+          {required:true, trigger:'blur'},
         ],
-        introduction: [
-          { required: true, message: "请输入演出简介", trigger: "blur" },
-          {
-            min: 1,
-            max: 4000,
-            message: "长度在 1 到 4000 个字符",
-            trigger: "blur",
-          },
+        available:[
+          {required:true, trigger:'blur'}
         ],
+        price:[
+          {required:true,trigger:'blur'}
+        ]
       },
       imageUrl: "",
     };
   },
   methods: {
+    editClosed() {
+      this.$refs.slotForm.resetFields();
+      area = {};
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -269,16 +234,16 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    handleChange1(value) {
-      console.log1(value);
+    handleSlotNum(slotNum) {
+      console.log1(slotNum);
     },
-    handleChange2(value) {
+    handleAreaNum(value) {
       console.log2(value);
     },
-    handleChange3(value) {
+    handleavailable(value) {
       console.log3(value);
     },
-    handleChange4(value) {
+    handlePrice(value) {
       console.log4(value);
     },
     handleAvatarSuccess(res, file) {
@@ -296,18 +261,24 @@ export default {
       }
       return isJPG && isLt5M;
     },
+    removeArea(item) {
+      var index = this.slotForm.areas.indexOf(item);
+      if (index !== -1) {
+        this.slotForm.areas.splice(index, 1);
+      }
+    },
+    addAreas() {
+      this.slotForm.areas.push({
+        value: "",
+        key: Date.now(),
+      });
+    },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.el-card {
-  margin-left: 15px;
-  margin-top: 15px;
-  margin-right: 15px;
-}
-
 .seat-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
@@ -315,37 +286,27 @@ export default {
   position: relative;
   overflow: hidden;
 }
-.avatar-uploader .el-upload:hover {
-  border-color: #409eff;
-}
 .seat-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  background-color: rgba(175, 180, 201, 0.404);
+  font-size: 48px;
+  color: #04152c67;
+  background-color: rgba(175, 180, 201, 0.164);
   width: 178px;
   height: 178px;
   line-height: 178px;
   text-align: center;
 }
-.avatar {
-  width: 178px;
-  height: 178px;
-  display: block;
-}
-
 .el-input {
-  width: 600px;
+  width: 300px;
 }
-.note {
-  margin-left: 10px;
-  margin-bottom: 20px;
-  color: rgb(49, 168, 189);
-  font-size: 20px;
-  font-weight: bold;
-}
-
 #submit {
   margin-left: 30px;
   margin-top: 30px;
+}
+.AreaList {
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+  margin-top: 30px !important;
+  margin-bottom: 0px !important;
+  background-color: #1d597c1f;
 }
 </style>
