@@ -180,6 +180,7 @@ img {
   position: absolute;
   bottom: 0px;
   background-color: #1d597ca2;
+  margin-left: 30px;
 }
 .router {
   margin-bottom: 50px;

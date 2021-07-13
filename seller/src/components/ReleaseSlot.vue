@@ -12,7 +12,7 @@
         :rules="rules"
         ref="slotForm"
         label-width="80px"
-         label-position=left
+        label-position="left"
         class="demo-slotForm"
       >
         <el-form-item label="演出 ID" prop="id">
@@ -55,7 +55,7 @@
           :rules="rules"
           ref="slotForm"
           label-width="95px"
-           label-position=left
+          label-position="left"
           class="demo-slotForm"
         >
           <el-form-item label="场次日期" required>
@@ -70,77 +70,79 @@
               </el-form-item>
             </el-col>
           </el-form-item>
-
+          
           <el-form-item label="起止时间" required>
-            <el-col :span="6">
-              <el-form-item prop="timeStart">
-                <el-time-picker
-                  placeholder="开始时间"
-                  v-model="slotForm.timeStart"
-                  style="width: 200px"
-                ></el-time-picker>
-              </el-form-item>
-            </el-col>
-            <el-col :span="6">
-              <el-form-item prop="timeEnd">
-                <el-time-picker
-                  placeholder="结束时间"
-                  v-model="slotForm.timeEnd"
-                  style="width: 200px"
-                ></el-time-picker>
-              </el-form-item>
-            </el-col>
+            <el-time-select
+              placeholder="起始时间"
+              v-model="slotForm.timeStart"
+              :picker-options="{
+                start: '00:00',
+                step: '00:10',
+                end: '24:00',
+              }"
+            >
+            </el-time-select>
+            <el-time-select
+              placeholder="结束时间"
+              v-model="slotForm.timeEnd"
+              :picker-options="{
+                start: '00:00',
+                step: '00:10',
+                end: '24:00',
+                minTime: startTime,
+              }"
+            >
+            </el-time-select>
           </el-form-item>
 
           <!-- 分区信息列表 -->
           <el-card class="AreaList">
-            	<el-form  :model="area"  :rules="areaRules" :ref="`ruleForm${index}`">
-                 <el-row
-              type="flex"
-              justify="space-between"
-              v-for="(area,index) in slotForm.areas"
-               :label="index"
-              :key="area.key"
-            >
-              <el-col span="10">
-                <el-form-item label="分区名称" prop="name">
-                  <el-input v-model="area.value" style="width: 80px"></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col span="10"
-                ><el-form-item label="座位数" prop="available">
-                  <el-input-number
-                    v-model="area.value"
-                    controls-position="right"
-                    @change="handleavailable"
-                    style="width: 120px"
-                    :min="1"
-                  ></el-input-number> </el-form-item
-              ></el-col>
-              <el-col span="10"
-                ><el-form-item label="票价" prop="price">
-                  <el-input-number
-                    v-model="slotForm.areas.price"
-                    controls-position="right"
-                    @change="handlePrice"
-                    style="width: 120px"
-                    :min="0"
-                  ></el-input-number> </el-form-item
-              ></el-col>
-              
-              <el-col span="10"
-                ><el-button type="danger" @click.prevent="removeArea(area)"
-                  >删除</el-button
-                ></el-col
+            <el-form :model="area" :rules="areaRules" :ref="`ruleForm${index}`">
+              <el-row
+                type="flex"
+                justify="space-between"
+                v-for="(area, index) in slotForm.areas"
+                :label="index"
+                :key="area.key"
               >
-          </el-row>
-          </el-form>
+                <el-col span="10">
+                  <el-form-item label="分区名称" prop="name">
+                    <el-input
+                      v-model="area.value"
+                      style="width: 80px"
+                    ></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col span="10"
+                  ><el-form-item label="座位数" prop="available">
+                    <el-input-number
+                      v-model="area.value"
+                      controls-position="right"
+                      @change="handleavailable"
+                      style="width: 120px"
+                      :min="1"
+                    ></el-input-number> </el-form-item
+                ></el-col>
+                <el-col span="10"
+                  ><el-form-item label="票价" prop="price">
+                    <el-input-number
+                      v-model="slotForm.areas.price"
+                      controls-position="right"
+                      @change="handlePrice"
+                      style="width: 120px"
+                      :min="0"
+                    ></el-input-number> </el-form-item
+                ></el-col>
+
+                <el-col span="10"
+                  ><el-button type="danger" @click.prevent="removeArea(area)"
+                    >删除</el-button
+                  ></el-col
+                >
+              </el-row>
+            </el-form>
           </el-card>
-          <el-form-item
-            required
-            label="添加分区"
-            style="margin-top: 20px"
-          >
+          <el-form-item required label="添加分区" style="margin-top: 20px">
             <el-button
               @click="addAreas"
               type="primary"
@@ -186,7 +188,7 @@ export default {
           {
             name: "",
             available: 0,
-             price: 0,
+            price: 0,
           },
         ],
         day: "",
@@ -202,16 +204,10 @@ export default {
         timeEnd: [{ required: true, trigger: "blur" }],
         name: [{ required: true, trigger: "blur" }],
       },
-      areaRules:{
-        name:[
-          {required:true, trigger:'blur'},
-        ],
-        available:[
-          {required:true, trigger:'blur'}
-        ],
-        price:[
-          {required:true,trigger:'blur'}
-        ]
+      areaRules: {
+        name: [{ required: true, trigger: "blur" }],
+        available: [{ required: true, trigger: "blur" }],
+        price: [{ required: true, trigger: "blur" }],
       },
       imageUrl: "",
     };
@@ -309,4 +305,5 @@ export default {
   margin-bottom: 0px !important;
   background-color: #1d597c1f;
 }
+
 </style>

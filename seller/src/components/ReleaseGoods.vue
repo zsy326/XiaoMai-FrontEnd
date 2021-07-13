@@ -8,21 +8,25 @@
     <el-card class="addCard" shadow="always">
       <div class="note">请填写您将要发布的周边的相关信息噢！</div>
       <el-form
-        :model="ruleForm"
+        :model="goodsForm"
         :rules="rules"
-        ref="ruleForm"
+        ref="goodsForm"
         label-width="120px"
-        label-position=left
-        class="demo-ruleForm"
+        label-position="left"
+        class="demo-goodsForm"
       >
         <el-form-item label="对应的演出ID" prop="showId">
-          <el-input v-model="ruleForm.showId"  
-          placeholder="请输入对应的演出ID"></el-input>
+          <el-input
+            v-model="goodsForm.showId"
+            placeholder="请输入对应的演出ID"
+          ></el-input>
         </el-form-item>
 
         <el-form-item label="周边名称" prop="goodsName">
-          <el-input v-model="ruleForm.goodsName"
-          placeholder="请输周边名称"></el-input>
+          <el-input
+            v-model="goodsForm.goodsName"
+            placeholder="请输周边名称"
+          ></el-input>
         </el-form-item>
 
         <el-form-item label="周边简介" prop="description">
@@ -31,7 +35,7 @@
               type="textarea"
               :rows="4"
               placeholder="请输入简介"
-              v-model="ruleForm.description"
+              v-model="goodsForm.description"
             >
             </el-input>
           </el-col>
@@ -39,7 +43,7 @@
 
         <el-form-item label="价格（RMB）" prop="price">
           <el-input-number
-            v-model="ruleForm.price"
+            v-model="goodsForm.price"
             controls-position="right"
             @change="handleChangePrice"
             :min="0"
@@ -48,14 +52,14 @@
 
         <el-form-item label="数量" prop="available">
           <el-input-number
-            v-model="ruleForm.available"
+            v-model="goodsForm.available"
             controls-position="right"
             @change="handleChangeNum"
             :min="1"
           ></el-input-number>
         </el-form-item>
 
-        <el-form-item label="上传实物图" prop="areaNum">
+        <el-form-item label="上传实物图" prop="goodsPhoto">
           <el-upload
             class="avatar-uploader"
             action="https://jsonplaceholder.typicode.com/posts/"
@@ -63,38 +67,57 @@
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
           >
-            <img v-if="goodsPhoto" :src="goodsPhoto" class="avatar" />
+            <img v-if="goodsForm.goodsPhoto" :src="goodsForm.goodsPhoto" class="avatar" />
             <i v-else class="el-icon-plus goods-uploader-icon"></i>
           </el-upload>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')"
+          <el-button type="primary" @click="confirmForm('goodsForm')"
             >立即发布</el-button
           >
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
+          <el-button @click="resetForm('goodsForm')">重置</el-button>
         </el-form-item>
-
       </el-form>
     </el-card>
-<el-dialog
-  title="系统提示"
-  :visible.sync="successVisible"
-  width="300px">
-  <span>发布演出成功</span>
+    <el-dialog title="系统提示" :visible.sync="successVisible" width="300px">
+      <span>发布演出成功</span>
 
-  <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="successVisible = false">继续发布</el-button>
-    <el-button type="primary" @click="backToOutline"> 
-       返回首页
-        </el-button>
-  </span>
-</el-dialog>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="successVisible = false"
+          >继续发布</el-button
+        >
+        <el-button type="primary" @click="backToOutline"> 返回首页 </el-button>
+      </span>
+    </el-dialog>
 
+    <!-- 更改确认信息的对话框 -->
+    <el-dialog
+      title="确认信息"
+      :visible.sync="confirmVisible"
+      width="500px"
+    >
+      <div>
+       您将要发布一个周边，信息如下：
+       <el-card>
+         <el-row>周边名称{{goodsForm.goodsName}}</el-row>
+          <el-row>周边简介{{goodsForm.description}}</el-row>
+           <el-row>周边价格{{goodsForm.price}}</el-row>
+            <el-row>周边数量{{goodsForm.available}}</el-row>
+       </el-card>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="confirmVisible = false">取 消</el-button>
+        <el-button type="primary" @click="Release"
+          >确 定</el-button
+        >
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   goodsName: "ReleaseSlot",
   props: {
@@ -102,23 +125,17 @@ export default {
   },
   data() {
     return {
-      ruleForm: {
-        showId:'',
+      goodsForm: {
+        showId: 123456,
         goodsName: "",
-        description:"",
-        goodsPhoto:'',
-        price:0,
-        available:1,
+        description: "",
+        goodsPhoto: "",
+        price: 0,
+        available: 1,
       },
       rules: {
         showId: [
           { required: true, message: "请输入对应的演出ID", trigger: "blur" },
-          {
-            min: 1,
-            max: 10,
-            message: "长度在 1 到 10 个字符",
-            trigger: "blur",
-          },
         ],
         goodsName: [
           { required: true, message: "请输入周边名称", trigger: "blur" },
@@ -138,26 +155,20 @@ export default {
             trigger: "blur",
           },
         ],
-        goodsPhoto:[
-         { required: true, trigger: "blur" },
-        ],
-        price:[
-           { required: true, message: "请输入周边价格", trigger: "blur" },
-        ],
-        available:[
-            { required: true, trigger: "blur" },
-        ],
+        // goodsPhoto: [{ required: true, trigger: "blur" }],
+        price: [{ required: true, message: "请输入周边价格", trigger: "blur" }],
+        available: [{ required: true, trigger: "blur" }],
       },
-      successVisible:false,
+      successVisible: false,
+      confirmVisible:false,
     };
   },
   methods: {
-    submitForm(formgoodsName) {
-      this.$refs[formgoodsName].validate((valid) => {
+    confirmForm(formName) {
+      this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.successVisible=true;
-            this.resetForm('ruleForm');
-          url
+          this.confirmVisible=true
+          // url;
         } else {
           console.log("error submit!!");
           return false;
@@ -167,6 +178,27 @@ export default {
     resetForm(formgoodsName) {
       this.$refs[formgoodsName].resetFields();
     },
+    async Release() {
+      const url = "/releaseGoods";
+      await axios
+        .post(url, {
+          sellerId: 123456,
+          showId: this.goodsForm.showId,
+          goodsName: this.goodsForm.goodsName,
+          description: this.goodsForm.description,
+          goodsPhoto: this.goodsForm.goodsPhoto,
+          price: this.goodsForm.price,
+          available: this.goodsForm.available,
+        })
+        .then((response) => {
+          this.successVisible = true;
+          resetForm("goodsForm");
+        })
+        .catch((err) => {
+          this.$message.error("未知错误！");
+          console.log(err);
+        });
+    },
     handleChangePrice(price) {
       console.log1(price);
     },
@@ -174,7 +206,7 @@ export default {
       console.log2(num);
     },
     handleAvatarSuccess(res, file) {
-      this.goodsPhoto = URL.createObjectURL(file.raw);
+      this.goodsForm.goodsPhoto = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";
@@ -187,6 +219,9 @@ export default {
         this.$message.error("上传座位图片大小不能超过 5MB!");
       }
       return isJPG && isLt5M;
+    },
+    backToOutline () {
+      this.$router.push('/outline')
     },
   },
 };
