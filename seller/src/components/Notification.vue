@@ -7,13 +7,13 @@
     </el-breadcrumb>
 
     <el-card class="box-card" shadow="always">
-      <el-button class="display-all" @click="clearFilter"
+      <!-- <el-button class="display-all" @click="clearFilter"
         >显示所有通知(取消筛选)</el-button
       >
 
       <el-button class="display-all" @click="successVisible = true"
         >查看获得的消息列表</el-button
-      >
+      > -->
       <el-table ref="filterTable" :data="notices"   stripe  height="520" style="width: 100%">
         <el-table-column
           prop="time"  label="发布日期"
@@ -26,20 +26,6 @@
         <el-table-column prop="title" label="标题" width="700">
         </el-table-column>
 
-
- <el-table-column
-      prop="tag"
-      label="阅读状态"
-      width="100"
-      :filters="[{ text: '已读', value: '已读' }, { text: '未读', value: '未读' }]"
-      :filter-method="filterTag"
-      filter-placement="bottom-end">
-      <template >
-        <el-tag
-          :type="tag === '未读' ? 'danger' : 'success'"
-          disable-transitions>{{tag}}</el-tag>
-      </template>
-    </el-table-column>
           </el-table>
         
       

@@ -1,4 +1,5 @@
 <template>
+<div>
   <el-container class="home-container" height="100%">
     <el-aside class="aside-box" width="260px" height="100%">
       <div class="logo">
@@ -106,6 +107,7 @@
       </el-container>
     </el-container>
   </el-container>
+</div>
 </template>
 
 <script>
@@ -151,6 +153,7 @@ img {
 .aside-box {
   background-color: #ffffff;
   height: 100vh;
+  margin-left: 0px;
 }
 .menu-box {
   background-color: #fdfdfd;
@@ -169,6 +172,7 @@ img {
 .main {
   /* background-color: #6e82b93d; */
   background-color: #fff;
+  
   position: relative;
   width: 100%;
   padding-bottom: 20px;

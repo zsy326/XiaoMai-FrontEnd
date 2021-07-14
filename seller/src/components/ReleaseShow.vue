@@ -93,6 +93,8 @@
       </el-form>
     </el-card>
 
+
+<!-- 发布演出成功信息 -->
     <el-dialog title="系统提示" :visible.sync="successVisible" width="300px">
       <span>发布演出成功</span>
 
@@ -115,11 +117,6 @@
        <el-card>
          <el-row>演出名称{{showForm.name}}</el-row>
           <el-row>演出简介{{showForm.introduction}}</el-row>
-           <!-- <el-row>演出照片
-               <el-image
-        style="width: 100px; height: 100px"
-        :src="showForm.photo"></el-image>
-             </el-row> -->
               <el-row>演出照片{{showForm.photo}}</el-row>
             <el-row>演出标签{{showForm.label}}</el-row>
        </el-card>

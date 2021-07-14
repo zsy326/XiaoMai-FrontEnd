@@ -29,18 +29,6 @@
           ></el-input>
         </el-form-item>
 
-        <el-form-item label="周边简介" prop="description">
-          <el-col style="width: 600px">
-            <el-input
-              type="textarea"
-              :rows="4"
-              placeholder="请输入简介"
-              v-model="goodsForm.description"
-            >
-            </el-input>
-          </el-col>
-        </el-form-item>
-
         <el-form-item label="价格（RMB）" prop="price">
           <el-input-number
             v-model="goodsForm.price"
@@ -60,15 +48,23 @@
         </el-form-item>
 
         <el-form-item label="上传实物图" prop="goodsPhoto">
-          <el-upload
-            class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
-          >
-            <img v-if="goodsForm.goodsPhoto" :src="goodsForm.goodsPhoto" class="avatar" />
-            <i v-else class="el-icon-plus goods-uploader-icon"></i>
+         <el-upload action="#" list-type="picture-card" :auto-upload="false">
+            <i slot="default" class="el-icon-plus"></i>
+            <div slot="file" slot-scope="{ file }">
+              <img
+                class="el-upload-list__item-thumbnail"
+                :src="file.url"
+                alt=""
+              />
+              <span class="el-upload-list__item-actions">
+                <span
+                  class="el-upload-list__item-preview"
+                  @click="handlePictureCardPreview(file)"
+                >
+                  <i class="el-icon-zoom-in"></i>
+                </span>
+                </span>
+            </div>
           </el-upload>
         </el-form-item>
 
@@ -99,11 +95,13 @@
     >
       <div>
        您将要发布一个周边，信息如下：
-       <el-card>
-         <el-row>周边名称{{goodsForm.goodsName}}</el-row>
-          <el-row>周边简介{{goodsForm.description}}</el-row>
-           <el-row>周边价格{{goodsForm.price}}</el-row>
-            <el-row>周边数量{{goodsForm.available}}</el-row>
+       <el-card >
+         <el-row>商家ID:{{goodsForm.sellerId}}</el-row>
+         <el-row>演出ID:{{goodsForm.showId}}</el-row>
+         <el-row>周边名称:{{goodsForm.goodsName}}</el-row>
+          <el-row>周边图片:{{goodsForm.goodsPhoto}}</el-row>
+           <el-row>周边价格:{{goodsForm.price}}</el-row>
+            <el-row>周边数量:{{goodsForm.available}}</el-row>
        </el-card>
       </div>
       <div slot="footer" class="dialog-footer">
@@ -126,12 +124,12 @@ export default {
   data() {
     return {
       goodsForm: {
-        showId: 123456,
-        goodsName: "",
-        description: "",
-        goodsPhoto: "",
-        price: 0,
-        available: 1,
+        sellerId:666666,
+        showId:11,
+        goodsName: "“恋爱的犀牛”纪念马克杯",
+        goodsPhoto: "balabala",
+        price: 59,
+        available: 500,
       },
       rules: {
         showId: [
@@ -179,13 +177,12 @@ export default {
       this.$refs[formgoodsName].resetFields();
     },
     async Release() {
-      const url = "/releaseGoods";
+      const url = "/Goods";
       await axios
         .post(url, {
-          sellerId: 123456,
+          sellerId: this.goodsForm.sellerId,
           showId: this.goodsForm.showId,
           goodsName: this.goodsForm.goodsName,
-          description: this.goodsForm.description,
           goodsPhoto: this.goodsForm.goodsPhoto,
           price: this.goodsForm.price,
           available: this.goodsForm.available,
